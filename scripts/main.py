@@ -39,7 +39,17 @@ def convert_score_to_descriptive(score):
     else:
         return 'Very easy to read. Easily understood by KS2 students and lower.'
 
-st.title('ONS recruitment - readability scoring')
+st.title("ONS recruitment - readability scoring")
+
+st.subheader("What is readability?")
+
+st.markdown("Readability refers to how easy a piece of text is to read. There are various different methods for assessing text readability. This tool focuses on two different readability tests, the Flesch reading ease score and the Flesch Kincaid reading grade level.")
+
+st.markdown("Further reading about these two readability tests is avaliable <a href='https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests'>here.</a>", unsafe_allow_html=True)
+
+st.subheader("How to use this app.")
+
+st.markdown("Simply copy and paste the text you want to analyse (e.g. a job advert) into the text box below and press Ctrl+Enter. This will output both a Flesch readability score and a Flesch-Kincaid reading grade level, and compare these to standard UK school reading levels.")
 
 text = st.text_area(label = 'Text to analyse', value = 'Input text to analyse here', height = 300)
 
