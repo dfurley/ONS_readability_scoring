@@ -3,6 +3,8 @@
 Created on Tue Aug  9 15:12:20 2022
 
 @author: furled
+
+Script to run streamlit app for FK score analysis
 """
 
 # import libraries
@@ -10,6 +12,22 @@ import textstat as tx
 import streamlit as st
 
 def convert_grade_to_uk_education_level(grade):
+    """
+    Function to convert US grade level to UK education level.
+    Takes one argument, 'grade'. This should be a float returned by the
+    textstat 'flesch_kincaid_grade' function.
+
+    Parameters
+    ----------
+    grade : float
+        Float returned by the textstat 'flesch_kincaid_grade' function.
+
+    Returns
+    -------
+    str
+        UK education level.
+
+    """
     if grade < 2:
         return 'KS1'
     elif grade < 6:
@@ -24,6 +42,22 @@ def convert_grade_to_uk_education_level(grade):
         return 'University or higher'
     
 def convert_score_to_descriptive(score):
+    """
+    Function to convert flesch reading-ease score (float) to descriptive
+    reading ease (string).
+
+    Parameters
+    ----------
+    score : float
+        Float output by textstat flesch_reading_ease function.
+
+    Returns
+    -------
+    str
+        Descriptive of reading ease.
+
+    """
+    
     if score < 10:
         return 'Extremely difficult to read. Professional reading level.'
     elif score < 30:
