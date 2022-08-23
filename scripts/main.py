@@ -83,9 +83,11 @@ st.markdown("Further reading about these two readability tests is avaliable <a h
 
 st.subheader("How to use this app.")
 
-st.markdown("Simply copy and paste the text you want to analyse (e.g. a job advert) into the text box below and press Ctrl+Enter. This will output both a Flesch readability score and a Flesch-Kincaid reading grade level, and compare these to standard UK school reading levels.")
+st.markdown("Simply copy and paste the text you want to analyse (e.g. a job advert) into the text box below and press the 'Analyse' button. This will output both a Flesch readability score and a Flesch-Kincaid reading grade level, and compare these to standard UK school reading levels.")
 
 text = st.text_area(label = 'Text to analyse', value = 'Input text to analyse here', height = 300)
+
+analyse_button = st.button('Analyse')
 
 reading_ease = tx.flesch_reading_ease(text)
 grade_level = tx.flesch_kincaid_grade(text)
@@ -93,5 +95,7 @@ grade_level = tx.flesch_kincaid_grade(text)
 reading_ease_descriptive = convert_score_to_descriptive(reading_ease)
 grade_descriptive = convert_grade_to_uk_education_level(grade_level)
 
-st.write('Reading ease: {:.2f}. {}'.format(reading_ease, reading_ease_descriptive))
-st.write('Grade level: {:.2f}. Equivalent to UK {} reading level.'.format(grade_level, grade_descriptive))
+
+if analyse_button:
+    st.write('Reading ease: {:.2f}. {}'.format(reading_ease, reading_ease_descriptive))
+    st.write('Grade level: {:.2f}. Equivalent to UK {} reading level.'.format(grade_level, grade_descriptive))
