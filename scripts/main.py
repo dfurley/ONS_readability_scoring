@@ -48,11 +48,22 @@ formatted_text_removed_fullstops = formatted_text.replace(".", "")
 word_tokens = word_tokenize(formatted_text_removed_fullstops)
 sentence_tokens = sent_tokenize(formatted_text)
 
+# analyse text to find fk scores
 reading_ease = tx.flesch_reading_ease(formatted_text)
 grade_level = tx.flesch_kincaid_grade(formatted_text)
 
+# convert numerical scores to descriptives
 reading_ease_descriptive = text_analysis_functions.convert_score_to_descriptive(reading_ease)
 grade_descriptive = text_analysis_functions.convert_grade_to_uk_education_level(grade_level)
+
+# find sentence, word and syllable counts
+word_count = len(word_tokens)
+sentence_count = len(sentence_tokens)
+syllable_count = text_analysis_functions.text_syllable_count(word_tokens)
+
+# calculate average sentence length
+avg_sentence_len = word_count / sentence_count
+
 ### End text analysis ###
 
 ### Streamlit markdown - post text analysis ###
@@ -62,5 +73,9 @@ if analyse_button:
     st.write('Grade level: {:.2f}. Equivalent to UK {} reading level.'.format(grade_level, grade_descriptive))
     
     st.subheader('Text analysis:')
+    st.write('Total words: {}'.format(word_count))
+    st.write('Total sentences: {}'.format(sentence_count))
+    st.write('Total syllables: {}'.format(syllable_count))
+    st.write('Average sentence length: {:.1f} words.'.format(avg_sentence_len))
     
 ### End Streamlit markdown - post text analysis ###
