@@ -152,3 +152,25 @@ def text_syllable_count(words):
         count += word_syllable_count(word)
         
     return count
+
+def list_long_words(words):
+    
+    word_dict = {}
+    
+    three_syllable_words = []
+    four_syllable_words = []
+    five_plus_syllable_words = []
+    
+    for word in words:
+        if word_syllable_count(word) >= 5:
+            five_plus_syllable_words.append(word)
+        elif word_syllable_count(word) >= 4:
+            four_syllable_words.append(word)
+        elif word_syllable_count(word) >= 3:
+            three_syllable_words.append(word)
+    
+    word_dict['three_syllables'] = three_syllable_words
+    word_dict['four_syllables'] = four_syllable_words
+    word_dict['five_plus_syllables'] = five_plus_syllable_words
+    
+    return word_dict    

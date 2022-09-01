@@ -62,6 +62,9 @@ syllable_count = text_analysis_functions.text_syllable_count(word_tokens)
 # calculate average sentence length
 avg_sentence_len = word_count / sentence_count
 
+# create list for 3, 4, and 5+ syllable words
+long_words_dict = text_analysis_functions.list_long_words(word_tokens)
+
 ### End text analysis ###
 
 ### Streamlit markdown - post text analysis ###
@@ -75,5 +78,20 @@ if analyse_button:
     st.write('Total sentences: {}'.format(sentence_count))
     st.write('Total syllables: {}'.format(syllable_count))
     st.write('Average sentence length: {:.1f} words.'.format(avg_sentence_len))
+    
+    st.subheader('Longer words')
+    st.write('Words with more syllables can be more difficult to read. Consider replacing some of the following words with shorter synonyms to increase the readability of the text.')
+    
+    st.subheader('5 + syllable words:')  
+    for word in long_words_dict['five_plus_syllables']:
+        st.write("- {}".format(word))
+        
+    st.subheader('4 syllable words:')  
+    for word in long_words_dict['four_syllables']:
+        st.write("- {}".format(word))
+        
+    st.subheader('3 syllable words:')  
+    for word in long_words_dict['three_syllables']:
+        st.write("- {}".format(word))
     
 ### End Streamlit markdown - post text analysis ###
