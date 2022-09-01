@@ -87,11 +87,11 @@ if analyse_button:
         st.write('The average sentence length of the inputted text is: {:.1f} words.'.format(avg_sentence_len))
         
         if avg_sentence_len <= 20:
-            st.write('This is a suitable average sentence length.')
+            st.write('This is a suitable average sentence length. Try focusing on reducing the number of high syllable words to increase readability.')
         else:
-            st.write('Try and reduce the length of some of the sentences.')
+            st.write('Try and reduce the length of some sentences.')
         
-        st.subheader('Longer words')
+        st.subheader('High syllable words')
         st.write('Words with more syllables can be more difficult to read. Consider replacing some of the words listed below with shorter synonyms to increase the readability of the text.')
         st.write('A note on syllables:')
         st.write('Getting a computer to count syllables is a tricky task. There are no set rules in the English language on exactly what a syllable is. As a result some of the words listed below may have fewer syllables than suggested.')
