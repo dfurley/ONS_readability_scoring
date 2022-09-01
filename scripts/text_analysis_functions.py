@@ -5,6 +5,8 @@ Created on Thu Sep  1 09:10:45 2022
 @author: furled
 """
 
+import re
+
 def convert_grade_to_uk_education_level(grade):
     """
     Function to convert US grade level to UK education level.
@@ -66,3 +68,87 @@ def convert_score_to_descriptive(score):
         return 'Easy to read. Conversational English for consumers.'
     else:
         return 'Very easy to read. Easily understood by KS2 students and lower.'
+
+def format_text_for_flesch_kincaid (text):
+    """
+    Formats text for FK scoring. Removes line breaks, punctuation and ellipses.
+
+    Parameters
+    ----------
+    text : TYPE
+        Unformatted text.
+
+    Returns
+    -------
+    text : TYPE
+        Formatted text.
+
+    """
+    # remove line breaks and replace with full stops, then replace question marks and ellipses with full stops
+    text = text.replace("\n", ".")
+    text = text.replace("?", ".")
+    text = text.replace("...", ". ")
+    text = text.replace("..", ". ")
+    text = text.replace(" .", "")
+    
+    # lowercase text
+    text = text.lower()
+    
+    
+    # remove punctuation
+    text = re.sub('[^a-zA-Z0-9 \n\.]', ' ', text)
+    
+    return text
+
+def word_syllable_count(word):
+    """
+    Function to count syllables in a word
+
+    Parameters
+    ----------
+    word : string
+        DESCRIPTION.
+
+    Returns
+    -------
+    count : int
+        Count of syllables in a given word.
+
+    """
+    word = word.lower()
+    count = 0
+    vowels = "aeiouy"
+    if word[0] in vowels:
+        count += 1
+    for index in range(1, len(word)):
+        if word[index] in vowels and word[index - 1] not in vowels:
+            count += 1
+    if word.endswith("e"):
+        count -= 1
+    if word.endswith("le"):
+        count += 1
+    if count == 0:
+        count += 1
+    return count
+
+def text_syllable_count(words):
+    """
+    Function to count all syllables in a text
+
+    Parameters
+    ----------
+    words : list
+        List of words from text, found using word_tokenize.
+
+    Returns
+    -------
+    count : int
+        Count of syllables from entire text.
+
+    """
+    count = 0
+    
+    for word in words:
+        count += word_syllable_count(word)
+        
+    return count
