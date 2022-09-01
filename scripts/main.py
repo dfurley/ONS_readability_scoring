@@ -80,7 +80,7 @@ if analyse_button:
     st.write('Average sentence length: {:.1f} words.'.format(avg_sentence_len))
     
     ### CHNAGE THIS ###
-    if reading_ease < 90:
+    if reading_ease < 60:
     
         st.subheader('Longer words')
         st.write('Words with more syllables can be more difficult to read. Consider replacing some of the words listed below with shorter synonyms to increase the readability of the text.')
