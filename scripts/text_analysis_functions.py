@@ -154,7 +154,20 @@ def text_syllable_count(words):
     return count
 
 def list_long_words(words):
-    
+    """
+    Function to return lists of 3, 4 and 5+ syllable words
+
+    Parameters
+    ----------
+    words : list
+        word tokens from text.
+
+    Returns
+    -------
+    word_dict : dictionary
+        dictionary of 3 different list, containing 3, 4 and 5+ syllable words.
+
+    """
     word_dict = {}
     
     three_syllable_words = []

@@ -90,16 +90,16 @@ if analyse_button:
         if len(long_words_dict['five_plus_syllables']) > 0:
             st.subheader('5 + syllable words:')  
             for word in long_words_dict['five_plus_syllables']:
-                st.write("- {}".format(word))
+                st.write("-{}".format(word))
             
         if len(long_words_dict['four_syllables']) > 0:
             st.subheader('4 syllable words:')  
             for word in long_words_dict['four_syllables']:
-                st.write("- {}".format(word))
+                st.write("-{}".format(word))
             
         if len(long_words_dict['three_syllables']) > 0:
             st.subheader('3 syllable words:')  
             for word in long_words_dict['three_syllables']:
-                st.write("- {}".format(word))
+                st.write("-{}".format(word))
     
 ### End Streamlit markdown - post text analysis ###
