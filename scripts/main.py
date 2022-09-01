@@ -12,7 +12,6 @@ import textstat as tx
 import streamlit as st
 import docx2txt
 import string
-import re
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
 
@@ -38,16 +37,30 @@ analyse_button = st.button('Analyse')
 ### End Streamlit markdown - pre text analysis ###
 
 ### Start text analysis ###
-reading_ease = tx.flesch_reading_ease(text)
-grade_level = tx.flesch_kincaid_grade(text)
+
+# format text
+formatted_text = text_analysis_functions.format_text_for_flesch_kincaid(text)
+
+# remove fullstops for word tokens
+formatted_text_removed_fullstops = formatted_text.replace(".", "")
+
+# tokenise for words and sentences
+word_tokens = word_tokenize(formatted_text_removed_fullstops)
+sentence_tokens = sent_tokenize(formatted_text)
+
+reading_ease = tx.flesch_reading_ease(formatted_text)
+grade_level = tx.flesch_kincaid_grade(formatted_text)
 
 reading_ease_descriptive = text_analysis_functions.convert_score_to_descriptive(reading_ease)
 grade_descriptive = text_analysis_functions.convert_grade_to_uk_education_level(grade_level)
 ### End text analysis ###
 
 ### Streamlit markdown - post text analysis ###
-if analyse_button:
+if analyse_button:   
+    st.subheader('Text readability scores:')
     st.write('Reading ease: {:.2f}. {}'.format(reading_ease, reading_ease_descriptive))
     st.write('Grade level: {:.2f}. Equivalent to UK {} reading level.'.format(grade_level, grade_descriptive))
+    
+    st.subheader('Text analysis:')
     
 ### End Streamlit markdown - post text analysis ###
