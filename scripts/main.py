@@ -10,8 +10,11 @@ Script to run streamlit app for FK score analysis
 # import libraries
 import textstat as tx
 import streamlit as st
+import nltk
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
+
+nltk.download('punkt')
 
 # import local modules
 import text_analysis_functions
