@@ -10,10 +10,16 @@ Script to run streamlit app for FK score analysis
 # import libraries
 import textstat as tx
 import streamlit as st
+import docx2txt
+import string
+import re
+from nltk.tokenize import sent_tokenize
+from nltk.tokenize import word_tokenize
 
 # import local modules
 import text_analysis_functions
 
+### Streamlit markdown - pre text analysis ###
 st.title("ONS recruitment - readability scoring")
 
 st.subheader("What is readability?")
@@ -29,14 +35,19 @@ st.markdown("Simply copy and paste the text you want to analyse (e.g. a job adve
 text = st.text_area(label = 'Text to analyse', value = 'Input text to analyse here', height = 300)
 
 analyse_button = st.button('Analyse')
+### End Streamlit markdown - pre text analysis ###
 
+### Start text analysis ###
 reading_ease = tx.flesch_reading_ease(text)
 grade_level = tx.flesch_kincaid_grade(text)
 
 reading_ease_descriptive = text_analysis_functions.convert_score_to_descriptive(reading_ease)
 grade_descriptive = text_analysis_functions.convert_grade_to_uk_education_level(grade_level)
+### End text analysis ###
 
-
+### Streamlit markdown - post text analysis ###
 if analyse_button:
     st.write('Reading ease: {:.2f}. {}'.format(reading_ease, reading_ease_descriptive))
     st.write('Grade level: {:.2f}. Equivalent to UK {} reading level.'.format(grade_level, grade_descriptive))
+    
+### End Streamlit markdown - post text analysis ###
