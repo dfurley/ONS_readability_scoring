@@ -29,6 +29,8 @@ st.subheader("How to use this app.")
 
 st.markdown("Simply copy and paste the text you want to analyse (e.g. a job advert) into the text box below and press the 'Analyse' button. This will output both a Flesch readability score and a Flesch-Kincaid reading grade level, and compare these to standard UK school reading levels.")
 
+st.markdown("If the readability score is too low, suggestions will be made for improving readability.")
+
 text = st.text_area(label = 'Text to analyse', value = 'Input text to analyse here', height = 300)
 
 analyse_button = st.button('Analyse')
@@ -77,29 +79,39 @@ if analyse_button:
     st.write('Total words: {}'.format(word_count))
     st.write('Total sentences: {}'.format(sentence_count))
     st.write('Total syllables: {}'.format(syllable_count))
-    st.write('Average sentence length: {:.1f} words.'.format(avg_sentence_len))
     
-    ### CHNAGE THIS ###
     if reading_ease < 60:
     
+        st.subheader('Sentence length')
+        st.markdown("Shorter sentences increase readability. Try and keep sentences at 15-20 words maximum. <a href='https://insidegovuk.blog.gov.uk/2014/08/04/sentence-length-why-25-words-is-our-limit/'>Government guidance</a> suggests an upper limit of 25 words in a sentence.", unsafe_allow_html=True)
+        st.write('The average sentence length of the inputted text is: {:.1f} words.'.format(avg_sentence_len))
+        
+        if avg_sentence_len <= 20:
+            st.write('This is a suitable average sentence length.')
+        else:
+            st.write('Try and reduce the length of some of the sentences.')
+        
         st.subheader('Longer words')
         st.write('Words with more syllables can be more difficult to read. Consider replacing some of the words listed below with shorter synonyms to increase the readability of the text.')
         st.write('A note on syllables:')
         st.write('Getting a computer to count syllables is a tricky task. There are no set rules in the English language on exactly what a syllable is. As a result some of the words listed below may have fewer syllables than suggested.')
         
         if len(long_words_dict['five_plus_syllables']) > 0:
-            st.subheader('5 + syllable words:')  
+            st.subheader('5 + syllable words')  
+            st.write('This text contains {} word(s) with five or more syllables. These are:'.format(len(long_words_dict['five_plus_syllables'])))
             for word in long_words_dict['five_plus_syllables']:
-                st.write("-{}".format(word))
+                st.write("- {}".format(word))
             
         if len(long_words_dict['four_syllables']) > 0:
-            st.subheader('4 syllable words:')  
+            st.subheader('4 syllable words')  
+            st.write('This text contains {} word(s) with four syllables. These are:'.format(len(long_words_dict['four_syllables'])))
             for word in long_words_dict['four_syllables']:
-                st.write("-{}".format(word))
+                st.write("- {}".format(word))
             
         if len(long_words_dict['three_syllables']) > 0:
-            st.subheader('3 syllable words:')  
+            st.subheader('3 syllable words')  
+            st.write('This text contains {} word(s) with three syllables. These are:'.format(len(long_words_dict['three_syllables'])))
             for word in long_words_dict['three_syllables']:
-                st.write("-{}".format(word))
+                st.write("- {}".format(word))
     
 ### End Streamlit markdown - post text analysis ###
