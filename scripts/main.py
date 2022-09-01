@@ -79,19 +79,27 @@ if analyse_button:
     st.write('Total syllables: {}'.format(syllable_count))
     st.write('Average sentence length: {:.1f} words.'.format(avg_sentence_len))
     
-    st.subheader('Longer words')
-    st.write('Words with more syllables can be more difficult to read. Consider replacing some of the following words with shorter synonyms to increase the readability of the text.')
+    ### CHNAGE THIS ###
+    if reading_ease < 90:
     
-    st.subheader('5 + syllable words:')  
-    for word in long_words_dict['five_plus_syllables']:
-        st.write("- {}".format(word))
+        st.subheader('Longer words')
+        st.write('Words with more syllables can be more difficult to read. Consider replacing some of the words listed below with shorter synonyms to increase the readability of the text.')
+        st.write('A note on syllables:')
+        st.write('Getting a computer to count syllables is a tricky task. There are no set rules in the English language on exactly what a syllable is. As a result some of the words listed below may have fewer syllables than suggested.')
         
-    st.subheader('4 syllable words:')  
-    for word in long_words_dict['four_syllables']:
-        st.write("- {}".format(word))
-        
-    st.subheader('3 syllable words:')  
-    for word in long_words_dict['three_syllables']:
-        st.write("- {}".format(word))
+        if len(long_words_dict['five_plus_syllables']) > 0:
+            st.subheader('5 + syllable words:')  
+            for word in long_words_dict['five_plus_syllables']:
+                st.write("- {}".format(word))
+            
+        if len(long_words_dict['four_syllables']) > 0:
+            st.subheader('4 syllable words:')  
+            for word in long_words_dict['four_syllables']:
+                st.write("- {}".format(word))
+            
+        if len(long_words_dict['three_syllables']) > 0:
+            st.subheader('3 syllable words:')  
+            for word in long_words_dict['three_syllables']:
+                st.write("- {}".format(word))
     
 ### End Streamlit markdown - post text analysis ###
