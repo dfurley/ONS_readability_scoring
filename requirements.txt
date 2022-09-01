@@ -1,6 +1,6 @@
 # This file may be used to create an environment using:
 # $ conda create --name <env> --file <this file>
 # platform: win-64
-nltk=3.5=pyhd8ed1ab_1
-streamlit=1.11.1=pypi_0
-textstat=0.7.3=pypi_0
+nltk==3.5
+streamlit==1.11.1
+textstat==0.7.3
